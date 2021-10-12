@@ -1,2 +1,5 @@
 ---
 # handlers file for httpd-srv
+- name: Reload firewalld rules
+  command:
+    cmd: firewall-cmd --reload

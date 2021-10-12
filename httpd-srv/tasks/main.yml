@@ -1,2 +1,30 @@
 ---
 # tasks file for httpd-srv
+- name: Install httpd package
+  yum:
+    name: httpd
+    state: latest
+
+- name: Enable and start httpd service
+  service:
+    name: httpd
+    enabled: yes
+    state: started
+
+- name: Copy index.html file
+  copy:
+    src: files/index.html
+    dest: /var/www/html/index.html
+
+- name: Enable and start firewalld
+  service:
+    name: firewalld
+    enabled: yes
+    state: started
+
+- name: Open firewall port
+  firewalld:
+    service: http
+    permanent: yes
+    state: enabled
+  notify: Reload firewalld rules
