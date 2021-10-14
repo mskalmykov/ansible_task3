@@ -1,2 +1,3 @@
 ---
 # defaults file for httpd-srv
+admin_email: undefined_email@example.com

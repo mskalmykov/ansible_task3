@@ -12,8 +12,8 @@
     state: started
 
 - name: Copy index.html file
-  copy:
-    src: files/index.html
+  template:
+    src: index.j2
     dest: /var/www/html/index.html
 
 - name: Enable and start firewalld
