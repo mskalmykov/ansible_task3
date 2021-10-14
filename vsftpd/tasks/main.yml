@@ -1,0 +1,30 @@
+---
+# tasks file for vsftpd
+- name: Install vsftpd package
+  yum:
+    name: vsftpd
+    state: latest
+
+- name: Enable and start vsftpd service
+  service:
+    name: vsftpd
+    enabled: yes
+    state: started
+
+#- name: Copy index.html file
+#template:
+#src: index.j2
+#dest: /var/www/html/index.html
+
+- name: Enable and start firewalld
+  service:
+    name: firewalld
+    enabled: yes
+    state: started
+
+- name: Enable ftp service network access
+  firewalld:
+    service: ftp
+    permanent: yes
+    state: enabled
+  notify: Reload firewalld rules

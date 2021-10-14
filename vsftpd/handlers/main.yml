@@ -1,0 +1,5 @@
+---
+# handlers file for vsftpd
+- name: Reload firewalld rules
+  command:
+    cmd: firewall-cmd --reload
