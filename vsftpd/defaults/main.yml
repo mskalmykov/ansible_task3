@@ -1,4 +1,4 @@
 ---
 # defaults file for vsftpd
-vsftpd_anon_enable: False
-vsftpd_anon_upload: False
+vsftpd_anon_enable: no
+vsftpd_anon_upload: no

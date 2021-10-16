@@ -11,6 +11,10 @@
     dest: /etc/vsftpd/vsftpd.conf
   notify: Restart vsftpd
 
+- name: Anonymous upload settings
+  include_tasks: anon_upload.yml
+  when: vsftpd_anon_upload
+
 - name: Enable and start vsftpd service
   service:
     name: vsftpd
