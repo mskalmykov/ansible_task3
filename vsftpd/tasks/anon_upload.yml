@@ -1,0 +1,31 @@
+---
+- name: Create anonymous upload dir
+  file:
+    path: /var/ftp/pub/upload
+    state: directory
+    owner: ftp
+    mode: '0755'
+    setype: public_content_rw_t
+
+- name: Install SELinux management python libs
+  yum:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - python3-libselinux
+    - python3-libsemanage
+
+- name: Configure SELinux for anonymous writes
+  seboolean:
+    name: ftpd_anon_write
+    state: yes
+    persistent: no
+
+# This task alone doesn't work if ftpd_anon_write is turned off in runtime config 
+# but is turned on in persistent config. The module doesn't change variable in such situation.
+# To work around this issue we need the previous task as well.
+- name: Configure SELinux for anonymous writes (persistent)
+  seboolean:
+    name: ftpd_anon_write
+    state: yes
+    persistent: yes
