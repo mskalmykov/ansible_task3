@@ -5,16 +5,17 @@
     name: vsftpd
     state: latest
 
+- name: Copy customized config
+  template:
+    src: vsftpd.conf.j2
+    dest: /etc/vsftpd/vsftpd.conf
+  notify: Restart vsftpd
+
 - name: Enable and start vsftpd service
   service:
     name: vsftpd
     enabled: yes
     state: started
-
-#- name: Copy index.html file
-#template:
-#src: index.j2
-#dest: /var/www/html/index.html
 
 - name: Enable and start firewalld
   service:

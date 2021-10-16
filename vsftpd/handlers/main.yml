@@ -3,3 +3,8 @@
 - name: Reload firewalld rules
   command:
     cmd: firewall-cmd --reload
+
+- name: Restart vsftpd
+  service:
+    name: vsftpd
+    state: restarted
